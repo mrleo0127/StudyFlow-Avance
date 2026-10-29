@@ -1,47 +1,65 @@
 
 <ActionBar title="StudyFlow" class="action-bar studyflow-actionbar">
   <NavigationButton visibility="hidden"></NavigationButton>
-
   <ActionItem
-    text="☰ Menú"
+    text="Menú"
     (tap)="onDrawerButtonTap()"
     android.position="actionBar"
     ios.position="left"
   ></ActionItem>
 </ActionBar>
 
-<ScrollView>
-  <StackLayout class="page-content">
-    <Label
-      text="Mis tareas"
-      class="page-title"
-    ></Label>
+<GridLayout rows="auto, auto, *, auto" class="page-content">
+  <Label
+    row="0"
+    text="Mis tareas"
+    class="page-title"
+  ></Label>
 
-    <Label
-      [text]="'Tienes ' + pendingCount + ' tareas pendientes'"
-      class="page-subtitle"
-    ></Label>
+  <Label
+    row="1"
+    [text]="'Tienes ' + pendingCount + ' tareas pendientes'"
+    class="page-subtitle"
+  ></Label>
 
-    <StackLayout class="tasks-list">
-      <app-task-card
-        *ngFor="let task of tasks"
-        [task]="task"
-        (toggle)="toggleTask($event)"
-      ></app-task-card>
-    </StackLayout>
+  
+<PullToRefresh
+  row="2"
+  (refresh)="refreshList($event)"
+  indicatorColor="#2563eb"
+  indicatorFillColor="#ffffff"
+>
+  <ListView
+    [items]="tasks"
+    separatorColor="transparent"
+    class="tasks-list"
+  >
+    <ng-template let-task="item">
+      <FlexboxLayout flexDirection="column" class="task-list-item">
+        <app-task-card
+          [task]="task"
+          (toggle)="toggleTask($event)"
+        ></app-task-card>
+      </FlexboxLayout>
+    </ng-template>
+  </ListView>
+</PullToRefresh>
 
-    <Label
-      *ngIf="tasks.length === 0"
-      text="No hay tareas registradas."
-      class="empty-message"
-    ></Label>
 
-    <Label
-      [text]="platformMessage"
-      class="page-subtitle"
-    ></Label>
-  </StackLayout>
-</ScrollView>
+  <Label
+    row="2"
+    *ngIf="tasks.length === 0"
+    text="No hay tareas registradas."
+    class="empty-message"
+  ></Label>
+
+  <Label
+    row="3"
+    [text]="platformMessage"
+    class="page-subtitle"
+  ></Label>
+</GridLayout>
+
 
 
 

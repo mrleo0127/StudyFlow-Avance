@@ -27,3 +27,12 @@
   margin-top: 24;
 }
 
+.task-list-item {
+  padding: 0 12;
+  width: 100%;
+}
+
+.tasks-list {
+  separator-color: transparent;
+}
+

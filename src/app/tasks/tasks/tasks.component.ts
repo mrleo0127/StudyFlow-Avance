@@ -31,6 +31,21 @@ export class TasksComponent {
     this.tasksService.toggleTask(id)
   }
 
+refreshList(args: any): void {
+  const pullRefresh = args.object;
+
+  const newTask: Task = {
+    id: Date.now(),
+    title: 'Nueva tarea ' + (this.tasks.length + 1),
+    subject: 'General',
+    dueDate: 'Por definir',
+    completed: false,
+  };
+
+  this.tasks.push(newTask);
+  pullRefresh.refreshing = false;
+}
+
   get pendingCount(): number {
     return this.tasks.filter((task) => !task.completed).length
   }
