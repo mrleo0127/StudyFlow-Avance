@@ -1,6 +1,6 @@
 
 <StackLayout class="task-card">
-  <GridLayout columns="*, auto" rows="auto, auto">
+  <GridLayout columns="*, auto" rows="auto, auto, auto">
     <Label
       row="0"
       col="0"
@@ -26,5 +26,14 @@
       class="task-button"
       (tap)="onToggle()"
     ></Button>
+
+    <Button
+      row="2"
+      col="1"
+      text="Categoría"
+      class="task-button"
+      (tap)="onChangeCategory()"
+    ></Button>
   </GridLayout>
 </StackLayout>
+
