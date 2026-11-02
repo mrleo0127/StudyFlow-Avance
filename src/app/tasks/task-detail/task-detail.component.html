@@ -1,0 +1,50 @@
+<ActionBar title="Detalle de tarea" class="action-bar">
+  <NavigationButton
+    text="Volver"
+    (tap)="goBack()"
+  ></NavigationButton>
+</ActionBar>
+
+<GridLayout rows="*" class="page-content">
+  <StackLayout *ngIf="task" class="task-card">
+
+    <Label
+      text="Información de la tarea"
+      class="page-title"
+      textWrap="true"
+    ></Label>
+
+    <Label text="Nombre" class="task-details"></Label>
+    <Label
+      [text]="task.title"
+      class="task-title"
+      textWrap="true"
+    ></Label>
+
+    <Label text="Asignatura" class="task-details"></Label>
+    <Label
+      [text]="task.subject"
+      class="task-title"
+      textWrap="true"
+    ></Label>
+
+    <Label text="Fecha de entrega" class="task-details"></Label>
+    <Label
+      [text]="task.dueDate"
+      class="task-title"
+    ></Label>
+
+    <Label text="Estado" class="task-details"></Label>
+    <Label
+      [text]="task.completed ? 'Completada' : 'Pendiente'"
+      class="task-title"
+    ></Label>
+
+  </StackLayout>
+
+  <Label
+    *ngIf="!task"
+    text="No se encontró la tarea solicitada."
+    class="empty-message"
+  ></Label>
+</GridLayout>

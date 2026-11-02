@@ -39,6 +39,7 @@
         <app-task-card
           [task]="task"
           (toggle)="toggleTask($event)"
+          (detail)="openTaskDetail($event)"
         ></app-task-card>
       </FlexboxLayout>
     </ng-template>

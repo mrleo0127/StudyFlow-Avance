@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+﻿import { Component, OnInit } from '@angular/core'
 import { NavigationEnd, Router } from '@angular/router'
 import { RouterExtensions } from '@nativescript/angular'
 import {
@@ -18,9 +18,10 @@ export class AppComponent implements OnInit {
   private _activatedUrl: string
   private _sideDrawerTransition: DrawerTransitionBase
 
-  constructor(private router: Router, private routerExtensions: RouterExtensions) {
-    // Use the component constructor to inject services.
-  }
+  constructor(
+    private router: Router,
+    private routerExtensions: RouterExtensions
+  ) {}
 
   ngOnInit(): void {
     this._activatedUrl = '/tasks'
@@ -28,7 +29,9 @@ export class AppComponent implements OnInit {
 
     this.router.events
       .pipe(filter((event: any) => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => (this._activatedUrl = event.urlAfterRedirects))
+      .subscribe((event: NavigationEnd) => {
+        this._activatedUrl = event.urlAfterRedirects
+      })
   }
 
   get sideDrawerTransition(): DrawerTransitionBase {
@@ -36,13 +39,15 @@ export class AppComponent implements OnInit {
   }
 
   isComponentSelected(url: string): boolean {
-  if (url === '/home') {
-    return this._activatedUrl === '/home'
-  }
+    if (url === '/home') {
+      return this._activatedUrl === '/home'
+    }
 
-  return this._activatedUrl === url ||
-    this._activatedUrl.startsWith(url + '/')
-}
+    return (
+      this._activatedUrl === url ||
+      this._activatedUrl.startsWith(url + '/')
+    )
+  }
 
   onNavItemTap(navItemRoute: string): void {
     this.routerExtensions.navigate([navItemRoute], {
@@ -51,7 +56,7 @@ export class AppComponent implements OnInit {
       },
     })
 
-    const sideDrawer = <RadSideDrawer>Application.getRootView()
+    const sideDrawer = Application.getRootView() as RadSideDrawer
     sideDrawer.closeDrawer()
   }
 }

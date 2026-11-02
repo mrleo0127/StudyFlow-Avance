@@ -41,6 +41,10 @@ export class TasksService {
     return this.tasks
   }
 
+  getTaskById(id: number): Task | undefined {
+  return this.tasks.find((task) => task.id === id)
+}
+
   toggleTask(id: number): void {
     const task = this.tasks.find((item) => item.id === id)
 

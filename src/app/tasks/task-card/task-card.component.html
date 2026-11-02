@@ -7,6 +7,7 @@
       [text]="task.title"
       class="task-title"
       textWrap="true"
+      (longPress)="onTitleLongPress()"
     ></Label>
 
     <Label
@@ -18,6 +19,7 @@
     ></Label>
 
     <Button
+      #statusButton
       row="0"
       rowSpan="2"
       col="1"
@@ -25,6 +27,22 @@
       [class.completed]="task.completed"
       class="task-button"
       (tap)="onToggle()"
+    ></Button>
+
+    <Button
+      row="2"
+      col="0"
+      text="Ver detalle"
+      class="task-button"
+      (tap)="onOpenDetail()"
+    ></Button>
+
+    <Button
+      row="2"
+      col="1"
+      text="Categoría"
+      class="task-button"
+      (tap)="onChangeCategory()"
     ></Button>
 
     <Button
